@@ -17,7 +17,7 @@ jobs:
         uses: TinyTapeout/tt-gds-action@tt10
         with:
           flow: openlane2
-          tools-ref: tt08-micro-tiles-experiment
+          tools-ref: tt10-micro-tiles-experiment
   
   precheck:
     needs: gds
@@ -26,7 +26,7 @@ jobs:
       - name: Run Tiny Tapeout Precheck
         uses: TinyTapeout/tt-gds-action/precheck@tt10
         with:
-          tools-ref: tt08-micro-tiles-experiment
+          tools-ref: tt10-micro-tiles-experiment
 
   gl_test:
     needs: gds
