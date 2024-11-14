@@ -9,11 +9,12 @@ You can also include images in this folder and reference them in the markdown. E
 
 ## How it works
 
-Explain how your project works
+This project is a fixed version of a lab created for ENEL 453. The input bits will create the calculated crc value on the output bits. 
+If there's enough space I'll add additional bits past the 8 bits to make this larger or allow the crc to be programmed; however, I doubt there will be enough space. 
 
 ## How to test
 
-Explain how to use your project
+This will be a micro tile alongside some other projects 
 
 ## External hardware
 
