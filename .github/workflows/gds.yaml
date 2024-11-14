@@ -6,7 +6,7 @@ on:
 
 jobs:
   gds:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     steps:
       - name: checkout repo
         uses: actions/checkout@v4
@@ -17,17 +17,20 @@ jobs:
         uses: TinyTapeout/tt-gds-action@tt10
         with:
           flow: openlane2
-
+          tools-ref: tt08-micro-tiles-experiment
+  
   precheck:
     needs: gds
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     steps:
       - name: Run Tiny Tapeout Precheck
         uses: TinyTapeout/tt-gds-action/precheck@tt10
+        with:
+          tools-ref: tt08-micro-tiles-experiment
 
   gl_test:
     needs: gds
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     steps:
       - name: checkout repo
         uses: actions/checkout@v4
@@ -39,7 +42,7 @@ jobs:
 
   viewer:
     needs: gds
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     permissions:
       pages: write      # to deploy to Pages
       id-token: write   # to verify the deployment originates from an appropriate source
