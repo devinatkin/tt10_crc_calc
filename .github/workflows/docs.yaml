@@ -14,6 +14,6 @@ jobs:
           submodules: recursive
 
       - name: Build docs
-        uses: TinyTapeout/tt-gds-action/docs@tt10
+        uses: TinyTapeout/tt-gds-action/docs@tt08
         with:
           tools-ref: tt08-micro-tiles-experiment
