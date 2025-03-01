@@ -19,6 +19,10 @@ tb_crc_calc:
 	$(IVL) -o $(OUT_DIR)/$@.vvp ../src/crc_calculator.v tb_crc_calculator.v
 	$(VVP) $(OUT_DIR)/$@.vvp
 
+tb_shift_register:
+	$(IVL) -o $(OUT_DIR)/$@.vvp ../src/shift_register.v tb_shift_register.v
+	$(VVP) $(OUT_DIR)/$@.vvp
+
 clean:
 	@echo Cleaning up...
 	rm -rf $(OUT_DIR)
