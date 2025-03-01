@@ -13,7 +13,9 @@ jobs:
         with:
           submodules: recursive
 
+      - name: Update info.yaml
+        run: |
+          sed -i 's/tiles: "micro"/tiles: "1x1"/' info.yaml
+
       - name: Build docs
-        uses: TinyTapeout/tt-gds-action/docs@tt08
-        with:
-          tools-ref: tt08-micro-tiles-experiment
+        uses: TinyTapeout/tt-gds-action/docs@tt10
