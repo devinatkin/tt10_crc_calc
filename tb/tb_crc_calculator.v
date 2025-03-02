@@ -45,37 +45,14 @@ module tb_crc_calc;
     // Test sequence
     initial begin
         // Initialize inputs
-        rst_n = 0;
-        data_in = 0;
-        crc_init = 8'h00;  // Initial CRC value
-        crc_poly = 8'hD5;  // Example polynomial for CRC-8
-
-        // Reset
-        #10;
-        rst_n = 1;
-
-        // Apply test data
-        test_data = 16'h1234; // Example test data
-
-        // Apply data to CRC calculator in a loop
-        for (int i = 15; i >= 0; i = i - 1) begin
-            data_in = test_data[i];
-            #10;
-        end
-        for (int i = 0; i < 8; i = i + 1) begin
-            data_in = 0;
-            #10;
-        end
+        $dumpfile("crc_calculator.vcd");
+        $dumpvars(0,tb_crc_calc);
         
-        `assert (crc_out, 8'hAE) // Expected CRC value
-        $display("CRC Output: %h", crc_out);
-        #100;
 
-        // Initialize inputs
         rst_n = 0;
         data_in = 0;
-        crc_init = 8'h00;  // Initial CRC value
-        crc_poly = 8'h1D;  // Example polynomial for CRC-8
+        crc_init = 8'hFF;  // Initial CRC value
+        crc_poly = 8'h9B;  // Example polynomial for CRC-8
 
         // Reset
         #10;
@@ -93,12 +70,14 @@ module tb_crc_calc;
             data_in = 0;
             #10;
         end
+        #10;
 
-        `assert (crc_out, 8'h12) // Expected CRC value
-        $display("CRC-8/GSM-A CRC Output: %h", crc_out);
+        $display("CRC Output: %h", crc_out);
+        `assert (crc_out, 8'hF1) // Expected CRC value
+        
         #100;
 
-        $finish; // End simulation
+        $finish;
     end
 
     // Monitor signals

@@ -19,7 +19,6 @@ project:
   source_files:
     - "tt_um_devinatkin_crc.v"
     - "crc_calculator.v"
-    - "crc_config_loader.v"
     - "shift_register.v"
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.

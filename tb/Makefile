@@ -13,7 +13,7 @@ $(shell mkdir -p $(OUT_DIR))
 # Phony targets
 .PHONY: all clean
 
-all: tb_crc_calc
+all: tb_crc_calc tb_shift_register tb_top
 
 tb_crc_calc: 
 	$(IVL) -o $(OUT_DIR)/$@.vvp ../src/crc_calculator.v tb_crc_calculator.v
@@ -21,6 +21,10 @@ tb_crc_calc:
 
 tb_shift_register:
 	$(IVL) -o $(OUT_DIR)/$@.vvp ../src/shift_register.v tb_shift_register.v
+	$(VVP) $(OUT_DIR)/$@.vvp
+
+tb_top:
+	$(IVL) -o $(OUT_DIR)/$@.vvp ../src/shift_register.v ../src/crc_calculator.v ../src/tt_um_devinatkin_crc.v tb_tt_um_devinatkin_crc.v
 	$(VVP) $(OUT_DIR)/$@.vvp
 
 clean:
