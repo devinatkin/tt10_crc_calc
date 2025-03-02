@@ -5,7 +5,6 @@ import cocotb
 from cocotb.clock import Clock
 from cocotb.triggers import ClockCycles
 
-
 @cocotb.test()
 async def test_project(dut):
     dut._log.info("Start")
@@ -20,17 +19,31 @@ async def test_project(dut):
     dut.rst_n.value = 0
     await ClockCycles(dut.clk, 10)
     dut.rst_n.value = 1
+    await ClockCycles(dut.clk, 5)
 
-    dut._log.info("Test project behavior")
+    dut._log.info("Loading CRC initialization value")
+    crc_init_value = 0xD5  # Example CRC initialization value
+    for i in range(8):
+        dut.ui_in.value = (crc_init_value >> (7 - i)) & 1
+        await ClockCycles(dut.clk, 1)
+    
+    dut._log.info("Loading CRC polynomial")
+    crc_poly_value = 0xBB  # Example CRC polynomial value
+    for i in range(8):
+        dut.ui_in.value = (crc_poly_value >> (7 - i)) & 1
+        await ClockCycles(dut.clk, 1)
+    
+    dut._log.info("Sending data bits")
+    test_data = 0xF0  # Example input data
+    for i in range(8):
+        dut.ui_in.value = (test_data >> (7 - i)) & 1
+        await ClockCycles(dut.clk, 1)
+    
+    await ClockCycles(dut.clk, 5)
+    dut._log.info(f"CRC Output: {dut.uo_out.value}")
 
-    # Set the input values you want to test
-    dut.ui_in.value = 20
-
-    # Wait for one clock cycle to see the output values
-    await ClockCycles(dut.clk, 1)
-
-    # The following assersion is just an example of how to check the output values.
-    # Change it to match the actual expected output of your module:
-
-    # Keep testing the module by changing the input values, waiting for
-    # one or more clock cycles, and asserting the expected output values.
+    # Example assertion for verification (modify based on expected CRC output)
+    expected_crc = 0x3A  # Replace with the actual expected CRC result
+    assert dut.uo_out.value == expected_crc, f"CRC mismatch: expected {expected_crc}, got {dut.uo_out.value}"
+    
+    dut._log.info("Test complete")

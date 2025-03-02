@@ -98,7 +98,7 @@ module tb_crc_calc;
         $display("CRC-8/GSM-A CRC Output: %h", crc_out);
         #100;
 
-        $finish; // End simulation
+        $finish;
     end
 
     // Monitor signals
