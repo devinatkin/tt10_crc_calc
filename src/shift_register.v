@@ -6,8 +6,8 @@ module shift_register #(
     input wire load,      // Load enable signal
     input wire shift,     // Shift enable signal
     input wire dir,       // Direction: 0 = Shift Left, 1 = Shift Right
-    input wire [WIDTH-1:0] data_in,  // Parallel input data
-    output reg [WIDTH-1:0] data_out  // Shift register output
+    input wire data_in,  // Serial Data Input
+    output reg [WIDTH-1:0] data_out  // Parallel Data Output
 );
 
 always @(posedge clk) begin
@@ -15,7 +15,7 @@ always @(posedge clk) begin
         data_out <= 0;  // Reset register to 0
     end 
     else if (load) begin
-        data_out <= data_in;  // Load data into the shift register
+        data_out <= {data_out[WIDTH-2:0], data_in};  // Load data into the shift register
     end
     else if (shift) begin
         if (dir) begin

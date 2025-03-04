@@ -23,8 +23,8 @@ tb_shift_register:
 	$(IVL) -o $(OUT_DIR)/$@.vvp ../src/shift_register.v tb_shift_register.v
 	$(VVP) $(OUT_DIR)/$@.vvp
 
-tb_crc_config_loader:
-	$(IVL) -o $(OUT_DIR)/$@.vvp ../src/crc_config_loader.v tb_crc_config_loader.v
+tb_top:
+	$(IVL) -o $(OUT_DIR)/$@.vvp ../src/shift_register.v ../src/crc_calculator.v ../src/tt_um_devinatkin_crc.v tb_tt_um_devinatkin_crc.v
 	$(VVP) $(OUT_DIR)/$@.vvp
 
 clean:
