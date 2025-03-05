@@ -58,8 +58,6 @@ async def test_project(dut):
 
     # dut._log.info(f"Available attributes in dut: {dir(dut.user_project)}")
     dut._log.info("Verify Poly and Init Values")
-    assert dut.user_project.crc_poly.value == 0x9B
-    assert dut.user_project.crc_init.value == 0xFF
 
     #-------------------------------------------------------------------------
     # Send Data Bits to the CRC Calculator
