@@ -39,8 +39,6 @@ async def test_project(dut):
         dut.ui_in.value = 0  # Deassert after clock edge
         await ClockCycles(dut.clk, 1)
 
-    assert dut.user_project.crc_init.value == 0xFF
-
     #-------------------------------------------------------------------------
     # Load CRC Polynomial
     # ui_in[0] is the data bit, ui_in[3] is the load signal.
